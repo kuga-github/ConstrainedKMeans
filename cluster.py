@@ -180,7 +180,11 @@ class ConstrainedKMeans:
     # 未知のデータを既知の中心点によってクラスタリングし、ラベルを得る
     def predict(self, X):
         self.valid_prd(X)
-        params = self.get_smcf_params(X.shape[0])
+        # Xが1-Dの場合2-Dに変換する
+        if X.ndim == 1:
+            X = X[:, np.newaxis]
+        n_samples, _ = X.shape
+        params = self.get_smcf_params(n_samples)
         unit_costs = self.calc_unit_costs(X, self.centers)
         mask = self.clustering(*params, unit_costs)
         labels = np.argmax(mask, axis=1)
