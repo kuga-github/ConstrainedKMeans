@@ -179,7 +179,7 @@ class ConstrainedKMeans:
 
     # 未知のデータを既知の中心点によってクラスタリングし、ラベルを得る
     def predict(self, X):
-        self.valid_prd(X)
+        self.valid_pr(X)
         # Xが1-Dの場合2-Dに変換する
         if X.ndim == 1:
             X = X[:, np.newaxis]
@@ -245,7 +245,7 @@ class ConstrainedKMeans:
                 )
 
     # predictの引数を検証する
-    def valid_prd(self, X):
+    def valid_pr(self, X):
         if self.centers is None or self.labels is None:
             raise RuntimeError("fit method hasn't been called.")
         if not isinstance(X, np.ndarray):
