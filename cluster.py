@@ -59,9 +59,9 @@ class ConstrainedKMeans:
         for c in range(1, self.n_clusters):
             # 一様分布からn_local_trials個の値をサンプリングし、最近傍中心点との二乗ユークリッド距離の総和を係数としてかける
             rand_vals = self.random_state.uniform(size=n_local_trials) * current_pot
-            # すでに中心点に選ばれたデータは最近傍中心点との二乗ユークリッドが0になるので、累積和を取ると同じ値が連続することになり、
+            # すでに中心点に選ばれたデータは最近傍中心点との二乗ユークリッド距離が0になるので、累積和を取ると同じ値が連続することになり、
             # searchsortedによってそれらのインデックスを避けて中心点候補をサンプリングできる　(a[i-1] < v <= a[i])
-            # 一様分布を変数変換し、最近傍中心点との二乗ユークリッドによって重み付けした確率分布からサンプリングするのと同義
+            # 一様分布を変数変換し、最近傍中心点との二乗ユークリッド距離によって重み付けした確率分布からサンプリングするのと同義
             candidate_ids = np.searchsorted(np.cumsum(closest_dist_sq), rand_vals)
             # out of range防止
             np.clip(candidate_ids, None, closest_dist_sq.size - 1, out=candidate_ids)
