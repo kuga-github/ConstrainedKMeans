@@ -138,6 +138,7 @@ class ConstrainedKMeans:
             start_nodes, end_nodes, capacities, unit_costs
         )
         smcf.set_nodes_supplies(np.arange(0, len(supplies)), supplies)
+        status = smcf.solve()
         solution_flows = smcf.flows(all_arcs)
         mask = solution_flows[: -self.n_clusters].reshape(
             (-1, self.n_clusters)
