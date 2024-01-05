@@ -14,7 +14,7 @@ class ConstrainedKMeans:
         n_clusters,  # クラスタ数
         min_membership,  # クラスタあたりの最小データ数
         max_membership=None,  # クラスタあたりの最大データ数
-        random_state=0,  # 一様分布のシード値
+        random_state=0,  # シード値
         max_iter=300,  # 最大イテレーション数
         tol=1e-4,  # 中心点の更新に伴う変動がこの値よりも小さければクラスタリングを終了する
     ):
