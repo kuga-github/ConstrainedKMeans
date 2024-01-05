@@ -77,7 +77,7 @@ class ConstrainedKMeans:
             candidates_pot = np.sum(distance_to_candidates, axis=-1)
             # 二乗ユークリッド距離が最小となるデータを中心点とする
             best_candidate = np.argmin(candidates_pot)
-            # 各種値を更新
+            # 各値を更新
             current_pot = candidates_pot[best_candidate]
             closest_dist_sq = distance_to_candidates[best_candidate]
             best_candidate = candidate_ids[best_candidate]
