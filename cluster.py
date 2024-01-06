@@ -36,6 +36,7 @@ class ConstrainedKMeans:
         self.labels = None
 
     # sklearnのkmeans_plusplusメソッドとほぼ一緒
+    # 二乗ユークリッド距離の計算にscipyを用いている点が異なる
     def kmeans_plusplus(self, X):
         n_samples, n_features = X.shape
         # クラスタの中心点の集合
@@ -88,19 +89,25 @@ class ConstrainedKMeans:
 
     # smcfのハイパラを定義する
     def get_smcf_params(self, n_samples):
+        # データのノード番号
         X_nodes = np.arange(n_samples)
+        # 中心点のノード番号
         cluster_nodes = np.arange(n_samples, n_samples + self.n_clusters)
+        # 最終的な需要を記述するために人工のノードを用意する
         artificial_demand_node = np.array([n_samples + self.n_clusters])
-
+        # エッジの始点
         start_nodes = np.concatenate(
             [np.repeat(X_nodes, self.n_clusters), cluster_nodes]
         )
+        # エッジの終点
         end_nodes = np.concatenate(
             [
                 np.tile(cluster_nodes, n_samples),
                 np.repeat(artificial_demand_node, self.n_clusters),
             ]
         )
+        # エッジの容量
+        # クラスタあたりの最大データ数 (max_membership) を指定可能
         capacities = np.concatenate(
             [
                 np.ones(
@@ -114,6 +121,9 @@ class ConstrainedKMeans:
                 ),
             ]
         )
+        # ノードの供給 (マイナスは需要)
+        # データの供給は1
+        # 中心点の需要はクラスタあたりの最小データ数 (min_membership)
         supplies = np.concatenate(
             [
                 np.ones(
