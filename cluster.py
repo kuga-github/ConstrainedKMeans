@@ -171,7 +171,7 @@ class ConstrainedKMeans:
         for iter_ in range(self.max_iter):
             # 各データが所属するクラスタをマスクの形で得る
             mask = self.clustering(*params, unit_costs)  # (n_samples, n_clusters)
-            # 中心点を得る
+            # 中心点を計算する
             centers_ = np.dot(mask.T, X) / np.sum(mask, axis=0)[:, np.newaxis]
             # コストを更新する
             unit_costs = self.calc_unit_costs(X, centers_)
