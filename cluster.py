@@ -141,7 +141,7 @@ class ConstrainedKMeans:
         unit_costs = np.concatenate([dist_sq.flatten(), np.zeros(self.n_clusters)])
         return unit_costs
 
-    # min cost flowを計算し、各データが所属するクラスタをマスクの形で得る
+    # 最小コストフロー問題を解き、各データが所属するクラスタをマスクの形で得る
     def clustering(self, start_nodes, end_nodes, capacities, supplies, unit_costs):
         smcf = min_cost_flow.SimpleMinCostFlow()
         all_arcs = smcf.add_arcs_with_capacity_and_unit_cost(
