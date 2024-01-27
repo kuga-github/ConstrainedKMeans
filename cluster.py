@@ -15,6 +15,7 @@ def random(X, n_clusters, random_state, **kwags):
     centers = X[indices]
     return centers, indices
 
+
 class ConstrainedKMeans:
     def __init__(
         self,
