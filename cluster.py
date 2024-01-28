@@ -156,7 +156,7 @@ class ConstrainedKMeans:
         # エッジのコスト（中心点との二乗ユークリッド距離）を計算する
         unit_costs, dist_sq = self.calc_unit_costs(X, centers)
 
-        for iter_ in range(1, self.max_iter+1):
+        for iter_ in range(0, self.max_iter):
             # 各データが所属するクラスタをマスクの形で得る
             mask = self.clustering(*params, unit_costs)  # (n_samples, n_clusters)
             # 中心点を計算する
