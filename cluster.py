@@ -9,7 +9,7 @@ from ortools.graph.python import min_cost_flow
 from scipy.spatial.distance import cdist
 
 
-def random(X, n_clusters, random_state, **kwags):
+def random(X, n_clusters, random_state, **kwargs):
     n_samples, n_features = X.shape
     indices = random_state.choice(n_samples, size=n_clusters, replace=True)
     centers = X[indices]
